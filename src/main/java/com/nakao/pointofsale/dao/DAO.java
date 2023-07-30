@@ -1,4 +1,4 @@
-package com.nakao.pos.dao;
+package com.nakao.pointofsale.dao;
 
 /**
  * @author Naoki Nakao on 7/18/2023

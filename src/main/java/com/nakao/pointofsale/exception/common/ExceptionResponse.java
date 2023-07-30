@@ -1,4 +1,4 @@
-package com.nakao.pos.exception.common;
+package com.nakao.pointofsale.exception.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -7,11 +7,6 @@ import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 import java.util.Map;
-
-/**
- * @author Naoki Nakao on 7/18/2023
- * @project POS
- */
 
 @Getter
 @Builder

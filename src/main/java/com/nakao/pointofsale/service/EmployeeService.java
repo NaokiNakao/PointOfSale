@@ -1,13 +1,15 @@
-package com.nakao.pos.service;
+package com.nakao.pointofsale.service;
 
-import com.nakao.pos.dao.EmployeeDAO;
-import com.nakao.pos.dto.EmployeeDTO;
-import com.nakao.pos.exception.*;
-import com.nakao.pos.model.Employee;
-import com.nakao.pos.repository.EmployeeRepository;
-import com.nakao.pos.repository.OrderRepository;
-import com.nakao.pos.util.IdentifierGenerator;
-import com.nakao.pos.dtomapper.EmployeeDTOMapper;
+import com.nakao.pointofsale.dao.EmployeeDAO;
+import com.nakao.pointofsale.dto.EmployeeDTO;
+import com.nakao.pointofsale.dtomapper.EmployeeDTOMapper;
+import com.nakao.pointofsale.exception.DeletionException;
+import com.nakao.pointofsale.exception.NotFoundException;
+import com.nakao.pointofsale.exception.UniqueIdentifierGenerationException;
+import com.nakao.pointofsale.model.Employee;
+import com.nakao.pointofsale.repository.EmployeeRepository;
+import com.nakao.pointofsale.repository.OrderRepository;
+import com.nakao.pointofsale.util.IdentifierGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -18,11 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/23/2023
- * @project POS
- */
 
 @Service
 @Transactional

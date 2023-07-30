@@ -1,13 +1,9 @@
-package com.nakao.pos.dtomapper;
+package com.nakao.pointofsale.dtomapper;
 
-import com.nakao.pos.dto.EmployeeDTO;
-import com.nakao.pos.model.Employee;
+import com.nakao.pointofsale.dto.EmployeeDTO;
+import com.nakao.pointofsale.model.Employee;
 import org.springframework.beans.BeanUtils;
 
-/**
- * @author Naoki Nakao on 7/24/2023
- * @project POS
- */
 public class EmployeeDTOMapper {
 
     public static EmployeeDTO fromEmployee(Employee employee) {

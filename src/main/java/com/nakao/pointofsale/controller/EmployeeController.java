@@ -1,8 +1,8 @@
-package com.nakao.pos.controller;
+package com.nakao.pointofsale.controller;
 
-import com.nakao.pos.dto.EmployeeDTO;
-import com.nakao.pos.model.Employee;
-import com.nakao.pos.service.EmployeeService;
+import com.nakao.pointofsale.dto.EmployeeDTO;
+import com.nakao.pointofsale.model.Employee;
+import com.nakao.pointofsale.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,11 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/23/2023
- * @project POS
- */
 
 @RestController
 @RequestMapping("/api/v1/employees")

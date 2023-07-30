@@ -1,14 +1,9 @@
-package com.nakao.pos.repository;
+package com.nakao.pointofsale.repository;
 
-import com.nakao.pos.model.Supplier;
+import com.nakao.pointofsale.model.Supplier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
-
-/**
- * @author Naoki Nakao on 7/19/2023
- * @project POS
- */
 
 @Repository
 public interface SupplierRepository extends CrudRepository<Supplier, Long>,

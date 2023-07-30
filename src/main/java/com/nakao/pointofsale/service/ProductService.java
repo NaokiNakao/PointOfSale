@@ -1,12 +1,14 @@
-package com.nakao.pos.service;
+package com.nakao.pointofsale.service;
 
-import com.nakao.pos.dao.ProductDAO;
-import com.nakao.pos.exception.*;
-import com.nakao.pos.model.Product;
-import com.nakao.pos.observer.LowStockEvent;
-import com.nakao.pos.repository.ProductRepository;
-import com.nakao.pos.repository.StockReplenishmentRepository;
-import com.nakao.pos.util.IdentifierGenerator;
+import com.nakao.pointofsale.dao.ProductDAO;
+import com.nakao.pointofsale.exception.DeletionException;
+import com.nakao.pointofsale.exception.NotFoundException;
+import com.nakao.pointofsale.exception.UniqueIdentifierGenerationException;
+import com.nakao.pointofsale.model.Product;
+import com.nakao.pointofsale.observer.LowStockEvent;
+import com.nakao.pointofsale.repository.ProductRepository;
+import com.nakao.pointofsale.repository.StockReplenishmentRepository;
+import com.nakao.pointofsale.util.IdentifierGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationEventPublisher;
@@ -17,11 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/18/2023
- * @project POS
- */
 
 @Service
 @Transactional

@@ -1,6 +1,6 @@
-package com.nakao.pos.repository;
+package com.nakao.pointofsale.repository;
 
-import com.nakao.pos.model.Order;
+import com.nakao.pointofsale.model.Order;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -8,11 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-
-/**
- * @author Naoki Nakao on 7/20/2023
- * @project POS
- */
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order, String>,

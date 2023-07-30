@@ -1,21 +1,16 @@
-package com.nakao.pos.observer;
+package com.nakao.pointofsale.observer;
 
-import com.nakao.pos.enumeration.EmployeeRole;
-import com.nakao.pos.model.Employee;
-import com.nakao.pos.model.Product;
-import com.nakao.pos.service.EmailSenderService;
-import com.nakao.pos.service.EmployeeService;
-import com.nakao.pos.util.EmailMessage;
+import com.nakao.pointofsale.enumeration.EmployeeRole;
+import com.nakao.pointofsale.model.Employee;
+import com.nakao.pointofsale.model.Product;
+import com.nakao.pointofsale.service.EmailSenderService;
+import com.nakao.pointofsale.service.EmployeeService;
+import com.nakao.pointofsale.util.EmailMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/28/2023
- * @project POS
- */
 
 @Component
 @RequiredArgsConstructor

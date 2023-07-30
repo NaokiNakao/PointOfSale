@@ -1,4 +1,4 @@
-package com.nakao.pos.model;
+package com.nakao.pointofsale.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -7,11 +7,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-/**
- * @author Naoki Nakao on 7/15/2023
- * @project POS
- */
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -1,11 +1,7 @@
-package com.nakao.pos.util;
+package com.nakao.pointofsale.util;
 
 import java.util.Random;
 
-/**
- * @author Naoki Nakao on 7/13/2023
- * @project POS
- */
 public class IdentifierGenerator {
 
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

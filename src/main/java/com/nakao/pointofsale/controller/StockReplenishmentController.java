@@ -1,7 +1,7 @@
-package com.nakao.pos.controller;
+package com.nakao.pointofsale.controller;
 
-import com.nakao.pos.model.StockReplenishment;
-import com.nakao.pos.service.StockReplenishmentService;
+import com.nakao.pointofsale.model.StockReplenishment;
+import com.nakao.pointofsale.service.StockReplenishmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,11 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/19/2023
- * @project POS
- */
 
 @RestController
 @RequestMapping("/api/v1/stock-replenishments")

@@ -1,12 +1,7 @@
-package com.nakao.pos.util;
+package com.nakao.pointofsale.util;
 
 import lombok.Builder;
 import lombok.Getter;
-
-/**
- * @author Naoki Nakao on 7/24/2023
- * @project POS
- */
 
 @Builder
 @Getter

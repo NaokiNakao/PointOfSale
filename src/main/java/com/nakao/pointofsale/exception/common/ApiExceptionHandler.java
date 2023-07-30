@@ -1,4 +1,4 @@
-package com.nakao.pos.exception.common;
+package com.nakao.pointofsale.exception.common;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

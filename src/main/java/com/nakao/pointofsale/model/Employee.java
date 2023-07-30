@@ -1,18 +1,16 @@
-package com.nakao.pos.model;
+package com.nakao.pointofsale.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
-
-/**
- * @author Naoki Nakao on 7/15/2023
- * @project POS
- */
 
 @Data
 @NoArgsConstructor

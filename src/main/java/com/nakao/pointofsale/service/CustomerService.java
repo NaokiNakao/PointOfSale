@@ -1,13 +1,13 @@
-package com.nakao.pos.service;
+package com.nakao.pointofsale.service;
 
-import com.nakao.pos.dao.CustomerDAO;
-import com.nakao.pos.exception.DeletionException;
-import com.nakao.pos.exception.NotFoundException;
-import com.nakao.pos.exception.UniqueIdentifierGenerationException;
-import com.nakao.pos.model.Customer;
-import com.nakao.pos.repository.CustomerRepository;
-import com.nakao.pos.repository.OrderRepository;
-import com.nakao.pos.util.IdentifierGenerator;
+import com.nakao.pointofsale.dao.CustomerDAO;
+import com.nakao.pointofsale.exception.DeletionException;
+import com.nakao.pointofsale.exception.NotFoundException;
+import com.nakao.pointofsale.exception.UniqueIdentifierGenerationException;
+import com.nakao.pointofsale.model.Customer;
+import com.nakao.pointofsale.repository.CustomerRepository;
+import com.nakao.pointofsale.repository.OrderRepository;
+import com.nakao.pointofsale.util.IdentifierGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -17,11 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/22/2023
- * @project POS
- */
 
 @Service
 @Transactional

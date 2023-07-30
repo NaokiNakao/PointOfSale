@@ -1,7 +1,7 @@
-package com.nakao.pos.controller;
+package com.nakao.pointofsale.controller;
 
-import com.nakao.pos.model.Category;
-import com.nakao.pos.service.CategoryService;
+import com.nakao.pointofsale.model.Category;
+import com.nakao.pointofsale.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,11 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/18/2023
- * @project POS
- */
 
 @RestController
 @RequestMapping("/api/v1/categories")

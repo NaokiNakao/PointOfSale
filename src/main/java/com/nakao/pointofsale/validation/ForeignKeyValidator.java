@@ -1,14 +1,10 @@
-package com.nakao.pos.validation;
+package com.nakao.pointofsale.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * @author Naoki Nakao on 7/20/2023
- * @project POS
- */
 public class ForeignKeyValidator implements ConstraintValidator<ForeignKeyValidation, Object> {
 
     private String tableName;

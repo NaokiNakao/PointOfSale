@@ -1,7 +1,7 @@
-package com.nakao.pos.model;
+package com.nakao.pointofsale.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.nakao.pos.validation.ForeignKeyValidation;
+import com.nakao.pointofsale.validation.ForeignKeyValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -13,11 +13,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDate;
-
-/**
- * @author Naoki Nakao on 7/14/2023
- * @project POS
- */
 
 @Data
 @Builder

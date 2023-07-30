@@ -1,15 +1,10 @@
-package com.nakao.pos.dao;
+package com.nakao.pointofsale.dao;
 
-import com.nakao.pos.model.Order;
-import com.nakao.pos.model.OrderItem;
+import com.nakao.pointofsale.model.Order;
+import com.nakao.pointofsale.model.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-/**
- * @author Naoki Nakao on 7/20/2023
- * @project POS
- */
 
 @Component
 @RequiredArgsConstructor

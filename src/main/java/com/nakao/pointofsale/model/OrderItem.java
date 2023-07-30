@@ -1,7 +1,7 @@
-package com.nakao.pos.model;
+package com.nakao.pointofsale.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.nakao.pos.validation.ForeignKeyValidation;
+import com.nakao.pointofsale.validation.ForeignKeyValidation;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
-
-/**
- * @author Naoki Nakao on 7/15/2023
- * @project POS
- */
 
 @Data
 @Builder

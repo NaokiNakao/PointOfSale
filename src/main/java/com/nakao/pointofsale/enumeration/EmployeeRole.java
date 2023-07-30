@@ -1,4 +1,4 @@
-package com.nakao.pos.enumeration;
+package com.nakao.pointofsale.enumeration;
 
 /**
  * @author Naoki Nakao on 7/28/2023

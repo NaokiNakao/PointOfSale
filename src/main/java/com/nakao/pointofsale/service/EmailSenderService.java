@@ -1,6 +1,6 @@
-package com.nakao.pos.service;
+package com.nakao.pointofsale.service;
 
-import com.nakao.pos.util.EmailMessage;
+import com.nakao.pointofsale.util.EmailMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -8,11 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-/**
- * @author Naoki Nakao on 7/24/2023
- * @project POS
- */
 
 @Service
 @RequiredArgsConstructor

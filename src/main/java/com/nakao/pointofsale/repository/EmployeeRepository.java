@@ -1,17 +1,12 @@
-package com.nakao.pos.repository;
+package com.nakao.pointofsale.repository;
 
-import com.nakao.pos.model.Employee;
+import com.nakao.pointofsale.model.Employee;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/23/2023
- * @project POS
- */
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, String >,

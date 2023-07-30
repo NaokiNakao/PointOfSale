@@ -1,7 +1,7 @@
-package com.nakao.pos.controller;
+package com.nakao.pointofsale.controller;
 
-import com.nakao.pos.model.Supplier;
-import com.nakao.pos.service.SupplierService;
+import com.nakao.pointofsale.model.Supplier;
+import com.nakao.pointofsale.service.SupplierService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,11 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/19/2023
- * @project POS
- */
 
 @RestController
 @RequestMapping("/api/v1/suppliers")
@@ -24,7 +19,7 @@ public class SupplierController {
 
     @GetMapping
     public ResponseEntity<List<Supplier>> getSuppliers(@RequestParam(defaultValue = "0") Integer page,
-                                                 @RequestParam(defaultValue = "10") Integer size) {
+                                                       @RequestParam(defaultValue = "10") Integer size) {
         List<Supplier> suppliers = supplierService.getSuppliers(page, size);
         return new ResponseEntity<>(suppliers, HttpStatus.OK);
     }

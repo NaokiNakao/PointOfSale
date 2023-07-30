@@ -1,11 +1,13 @@
-package com.nakao.pos.service;
+package com.nakao.pointofsale.service;
 
-import com.nakao.pos.dao.OrderDAO;
-import com.nakao.pos.enumeration.OrderStatus;
-import com.nakao.pos.exception.*;
-import com.nakao.pos.model.Order;
-import com.nakao.pos.model.OrderItem;
-import com.nakao.pos.repository.OrderRepository;
+import com.nakao.pointofsale.dao.OrderDAO;
+import com.nakao.pointofsale.enumeration.OrderStatus;
+import com.nakao.pointofsale.exception.DeletionException;
+import com.nakao.pointofsale.exception.NotFoundException;
+import com.nakao.pointofsale.exception.OrderAlreadyProcessedException;
+import com.nakao.pointofsale.model.Order;
+import com.nakao.pointofsale.model.OrderItem;
+import com.nakao.pointofsale.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -18,11 +20,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
-/**
- * @author Naoki Nakao on 7/20/2023
- * @project POS
- */
 
 @Service
 @Transactional

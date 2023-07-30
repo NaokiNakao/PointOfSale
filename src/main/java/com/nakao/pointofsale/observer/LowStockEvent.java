@@ -1,11 +1,7 @@
-package com.nakao.pos.observer;
+package com.nakao.pointofsale.observer;
 
-import com.nakao.pos.model.Product;
+import com.nakao.pointofsale.model.Product;
 
-/**
- * @author Naoki Nakao on 7/28/2023
- * @project POS
- */
 public class LowStockEvent {
 
     private final Product product;

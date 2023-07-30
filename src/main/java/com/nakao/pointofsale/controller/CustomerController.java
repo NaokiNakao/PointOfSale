@@ -1,7 +1,7 @@
-package com.nakao.pos.controller;
+package com.nakao.pointofsale.controller;
 
-import com.nakao.pos.model.Customer;
-import com.nakao.pos.service.CustomerService;
+import com.nakao.pointofsale.model.Customer;
+import com.nakao.pointofsale.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @author Naoki Nakao on 7/22/2023
- * @project POS
- */
 
 @RestController
 @RequestMapping("/api/v1/customers")

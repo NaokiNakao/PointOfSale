@@ -1,13 +1,13 @@
-package com.nakao.pos.service;
+package com.nakao.pointofsale.service;
 
-import com.nakao.pos.dao.StockReplenishmentDAO;
-import com.nakao.pos.exception.DeletionException;
-import com.nakao.pos.exception.NotFoundException;
-import com.nakao.pos.enumeration.StockReplenishmentStatus;
-import com.nakao.pos.exception.StockReplenishmentProcessingException;
-import com.nakao.pos.model.StockReplenishment;
-import com.nakao.pos.repository.ProductRepository;
-import com.nakao.pos.repository.StockReplenishmentRepository;
+import com.nakao.pointofsale.dao.StockReplenishmentDAO;
+import com.nakao.pointofsale.enumeration.StockReplenishmentStatus;
+import com.nakao.pointofsale.exception.DeletionException;
+import com.nakao.pointofsale.exception.NotFoundException;
+import com.nakao.pointofsale.exception.StockReplenishmentProcessingException;
+import com.nakao.pointofsale.model.StockReplenishment;
+import com.nakao.pointofsale.repository.ProductRepository;
+import com.nakao.pointofsale.repository.StockReplenishmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -18,11 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
-
-/**
- * @author Naoki Nakao on 7/19/2023
- * @project POS
- */
 
 @Service
 @Transactional

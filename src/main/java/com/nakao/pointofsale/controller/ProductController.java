@@ -1,7 +1,7 @@
-package com.nakao.pos.controller;
+package com.nakao.pointofsale.controller;
 
-import com.nakao.pos.model.Product;
-import com.nakao.pos.service.ProductService;
+import com.nakao.pointofsale.model.Product;
+import com.nakao.pointofsale.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,11 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-/**
- * @author Naoki Nakao on 7/18/2023
- * @project POS
- */
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -24,7 +19,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getProducts(@RequestParam(defaultValue = "0") Integer page,
-                                                @RequestParam(defaultValue = "10") Integer size) {
+                                                     @RequestParam(defaultValue = "10") Integer size) {
         List<Product> products = productService.getProducts(page, size);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }

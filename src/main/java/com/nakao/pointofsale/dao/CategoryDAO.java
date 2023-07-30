@@ -1,16 +1,9 @@
-package com.nakao.pos.dao;
+package com.nakao.pointofsale.dao;
 
-import com.nakao.pos.model.Category;
+import com.nakao.pointofsale.model.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.sql.SQLIntegrityConstraintViolationException;
-
-/**
- * @author Naoki Nakao on 7/18/2023
- * @project POS
- */
 
 @Component
 @RequiredArgsConstructor
