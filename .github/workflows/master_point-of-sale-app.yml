@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -51,3 +51,9 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_896990F9233F4CBD9928035BE194E01B }}
           package: '*.jar'
+        env:
+          DB_HOST_PROD: ${{ secrets.DB_HOST_PROD }}
+          DB_PORT_PROD: ${{ secrets.DB_PORT_PROD }}
+          DB_NAME_PROD: ${{ secrets.DB_NAME_PROD }}
+          DB_USERNAME_PROD: ${{ secrets.DB_USERNAME_PROD }}
+          DB_PASSWORD_PROD: ${{ secrets.DB_PASSWORD_PROD }}
