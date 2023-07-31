@@ -1,4 +1,4 @@
-package com.nakao.pointofsale.validation;
+package com.nakao.pointofsale.annotations;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -29,13 +29,8 @@ public class ForeignKeyValidator implements ConstraintValidator<ForeignKeyValida
         }
 
         String query = "SELECT COUNT(*) FROM " + tableName + " WHERE " + fieldName + " = ?";
-        int count = 0;
-
-        try {
-            count = jdbcTemplate.queryForObject(query, Integer.class, value);
-        }
-        catch (NullPointerException ignored) {}
-
+        Integer count = jdbcTemplate.queryForObject(query, Integer.class, value);
+        assert count != null;
         return count > 0;
     }
 

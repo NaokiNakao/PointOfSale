@@ -1,4 +1,4 @@
-package com.nakao.pointofsale.dtomapper;
+package com.nakao.pointofsale.mapper;
 
 import com.nakao.pointofsale.dto.EmployeeDTO;
 import com.nakao.pointofsale.model.Employee;

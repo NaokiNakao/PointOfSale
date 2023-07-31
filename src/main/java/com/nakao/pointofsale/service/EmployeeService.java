@@ -2,7 +2,7 @@ package com.nakao.pointofsale.service;
 
 import com.nakao.pointofsale.dao.EmployeeDAO;
 import com.nakao.pointofsale.dto.EmployeeDTO;
-import com.nakao.pointofsale.dtomapper.EmployeeDTOMapper;
+import com.nakao.pointofsale.mapper.EmployeeDTOMapper;
 import com.nakao.pointofsale.exception.DeletionException;
 import com.nakao.pointofsale.exception.NotFoundException;
 import com.nakao.pointofsale.exception.UniqueIdentifierGenerationException;
