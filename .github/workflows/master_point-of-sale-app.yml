@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -31,12 +31,12 @@ jobs:
           path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -49,11 +49,5 @@ jobs:
         with:
           app-name: 'point-of-sale-app'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_896990F9233F4CBD9928035BE194E01B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DC95FAA0081B4F6F9FEA682F113E8C54 }}
           package: '*.jar'
-        env:
-          DB_HOST_PROD: ${{ secrets.DB_HOST_PROD }}
-          DB_PORT_PROD: ${{ secrets.DB_PORT_PROD }}
-          DB_NAME_PROD: ${{ secrets.DB_NAME_PROD }}
-          DB_USERNAME_PROD: ${{ secrets.DB_USERNAME_PROD }}
-          DB_PASSWORD_PROD: ${{ secrets.DB_PASSWORD_PROD }}
