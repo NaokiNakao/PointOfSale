@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,16 +68,16 @@ public class ProductService {
         }
     }
 
-    public Boolean checkForReplenishment(String sku) {
-        Product product = getProductBySku(sku);
+    @Scheduled(cron = "0 0 17 * * ?")
+    public void checkForReplenishment() {
+        List<Product> products = productRepository.findAll();
 
-        if (product.getStock() < product.getMinStock()) {
-            LowStockEvent lowStockEvent = new LowStockEvent(product);
-            applicationEventPublisher.publishEvent(lowStockEvent);
-            return true;
+        for (Product product : products) {
+            if (product.getStock() < product.getMinStock()) {
+                LowStockEvent lowStockEvent = new LowStockEvent(product);
+                applicationEventPublisher.publishEvent(lowStockEvent);
+            }
         }
-
-        return false;
     }
 
     private void uniqueIdVerification(String sku) {
