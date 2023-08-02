@@ -4,7 +4,7 @@ import com.nakao.pointofsale.dao.OrderDAO;
 import com.nakao.pointofsale.enumeration.OrderStatus;
 import com.nakao.pointofsale.exception.DeletionException;
 import com.nakao.pointofsale.exception.NotFoundException;
-import com.nakao.pointofsale.exception.OrderAlreadyProcessedException;
+import com.nakao.pointofsale.exception.BusinessLogicException;
 import com.nakao.pointofsale.model.Order;
 import com.nakao.pointofsale.model.OrderItem;
 import com.nakao.pointofsale.repository.OrderRepository;
@@ -57,7 +57,7 @@ public class OrderService {
             validateOrderStatus(getOrderById(id));
             orderRepository.deleteById(id);
         }
-        catch (OrderAlreadyProcessedException e) {
+        catch (BusinessLogicException e) {
             throw new DeletionException("Unable to delete Order with ID: " + id);
         }
     }
@@ -90,7 +90,7 @@ public class OrderService {
 
     private void validateOrderStatus(Order order) {
         if (!order.getStatus().equals(OrderStatus.IN_PROGRESS.getValue())) {
-            throw new OrderAlreadyProcessedException("Order with ID: " + order.getId() + " already processed");
+            throw new BusinessLogicException("Order with ID: " + order.getId() + " already processed");
         }
     }
 
