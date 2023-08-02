@@ -48,18 +48,4 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/{sku}/check-status")
-    public ResponseEntity<String> checkStockLevel(@PathVariable String sku) {
-        String message;
-
-        if (productService.checkForReplenishment(sku)) {
-            message = "Stock replenishment for " + sku + " is needed. Notification sent";
-        }
-        else {
-            message = "Stock level for " + sku + " is sufficient";
-        }
-
-        return new ResponseEntity<>(message, HttpStatus.OK);
-    }
-
 }
