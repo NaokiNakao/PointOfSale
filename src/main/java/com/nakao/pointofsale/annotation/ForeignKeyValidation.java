@@ -1,4 +1,4 @@
-package com.nakao.pointofsale.annotations;
+package com.nakao.pointofsale.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
