@@ -86,7 +86,7 @@ CREATE TABLE orders (
     employee_id    VARCHAR(9) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE NO ACTION ON UPDATE CASCADE,
-    CONSTRAINT CK_orders_payment_method CHECK ( payment_method IN ('CASH', 'CREDIT_CARD') ),
+    CONSTRAINT CK_orders_payment_method CHECK ( payment_method IN ('CASH', 'CREDIT_CARD', 'PAYPAL') ),
     CONSTRAINT CK_orders_status CHECK ( status IN ('IN_PROGRESS', 'PROCESSED') )
 );
 
