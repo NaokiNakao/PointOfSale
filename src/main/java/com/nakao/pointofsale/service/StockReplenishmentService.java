@@ -61,6 +61,15 @@ public class StockReplenishmentService {
         }
     }
 
+    /**
+     * Processes an existing stock replenishment, updating the stock quantity of the associated product
+     * and changing the status of the replenishment to "DELIVERED".
+     *
+     * @param id The unique identifier of the stock replenishment to be processed.
+     * @throws BusinessLogicException If the stock replenishment is not in the "PENDING" status,
+     *                               indicating that it cannot be processed at this time.
+     * @throws NotFoundException If a stock replenishment with the provided ID is not found.
+     */
     public void replenishmentProcessing(String id) {
         StockReplenishment stockReplenishment = getStockReplenishmentById(id);
 

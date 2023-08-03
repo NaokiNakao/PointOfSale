@@ -66,6 +66,15 @@ public class OrderService {
         }
     }
 
+    /**
+     * Adds an order item to the specified order, updates its total price, and saves the changes.
+     *
+     * @param id The ID of the order to which the item will be added.
+     * @param orderItem The order item to be added.
+     * @throws BusinessLogicException If the order's status is not "IN_PROGRESS" or if there is no available stock
+     *                               for the product associated with the order item.
+     * @throws NotFoundException If the product associated with the order item is not found.
+     */
     public void addItem(String id, OrderItem orderItem) {
         Order order = getOrderById(id);
         validateAvailableStock(orderItem.getProductSku());
@@ -73,6 +82,15 @@ public class OrderService {
         updateOrderWithNewItem(order, orderItem);
     }
 
+    /**
+     * Removes an order item with the specified product SKU from the given order, updates the order's total price,
+     * and saves the changes.
+     *
+     * @param orderId The ID of the order from which the item will be removed.
+     * @param productSku The SKU of the product associated with the item to be removed.
+     * @throws BusinessLogicException If the order's status is not "IN_PROGRESS".
+     * @throws NotFoundException If the order item with the specified product SKU is not found in the order.
+     */
     public void removeItem(String orderId, String productSku) {
         Order order = getOrderById(orderId);
         validateOrderStatus(order);
@@ -86,6 +104,11 @@ public class OrderService {
         }
     }
 
+    /**
+     * Processes an order by updating its date and status to "PROCESSED", and saves the changes.
+     *
+     * @param id The ID of the order to be processed.
+     */
     public void processOrder(String id) {
         Order order = getOrderById(id);
         order.setDate(LocalDate.now());

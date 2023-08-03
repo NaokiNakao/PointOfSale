@@ -69,6 +69,12 @@ public class ProductService {
         }
     }
 
+    /**
+     * Scheduled method that checks for products with stock levels below the minimum stock threshold
+     * and publishes a low stock event for each such product.
+     * <p>
+     * This method is scheduled to run at a specific time using a cron expression.
+     */
     @Scheduled(cron = "0 0 17 * * ?")
     public void checkForReplenishment() {
         List<Product> products = productRepository.findAll();
