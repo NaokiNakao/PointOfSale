@@ -1,11 +1,8 @@
 package com.nakao.pointofsale.enumeration;
 
-/**
- * @author Naoki Nakao on 7/28/2023
- * @project POS
- */
 public enum EmployeeRole {
 
+    CASHIER("CASHIER"),
     MANAGER("MANAGER"),
     EMPLOYEE("EMPLOYEE");
 

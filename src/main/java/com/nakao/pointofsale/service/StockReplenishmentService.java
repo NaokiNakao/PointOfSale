@@ -39,9 +39,10 @@ public class StockReplenishmentService {
                 .orElseThrow(() -> new NotFoundException("Stock Replenishment not found with ID: " + id));
     }
 
-    public void createStockReplenishment(StockReplenishment stockReplenishment) {
+    public String createStockReplenishment(StockReplenishment stockReplenishment) {
         stockReplenishment.setId(UUID.randomUUID().toString());
         stockReplenishmentDAO.insert(stockReplenishment);
+        return stockReplenishment.getId();
     }
 
     public void updateStockReplenishment(String id, StockReplenishment stockReplenishment) {

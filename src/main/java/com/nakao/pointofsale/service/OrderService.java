@@ -7,7 +7,9 @@ import com.nakao.pointofsale.exception.NotFoundException;
 import com.nakao.pointofsale.exception.BusinessLogicException;
 import com.nakao.pointofsale.model.Order;
 import com.nakao.pointofsale.model.OrderItem;
+import com.nakao.pointofsale.model.Product;
 import com.nakao.pointofsale.repository.OrderRepository;
+import com.nakao.pointofsale.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderDAO orderDAO;
+    private final ProductRepository productRepository;
 
     public List<Order> getOrders(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -40,9 +43,10 @@ public class OrderService {
                 .orElseThrow(() -> new NotFoundException("Order not found with ID: " + id));
     }
 
-    public void createOrder(Order order) {
+    public String createOrder(Order order) {
         order.setId(UUID.randomUUID().toString());
         orderDAO.insert(order);
+        return order.getId();
     }
 
     public void updateOrder(String id, Order order) {
@@ -64,6 +68,7 @@ public class OrderService {
 
     public void addItem(String id, OrderItem orderItem) {
         Order order = getOrderById(id);
+        validateAvailableStock(orderItem.getProductSku());
         validateOrderStatus(order);
         updateOrderWithNewItem(order, orderItem);
     }
@@ -86,6 +91,15 @@ public class OrderService {
         order.setDate(LocalDate.now());
         order.setStatus(OrderStatus.PROCESSED.getValue());
         orderRepository.save(order);
+    }
+
+    private void validateAvailableStock(String productSku) {
+        Product product = productRepository.findById(productSku)
+                .orElseThrow(() -> new NotFoundException("Product not found with SKU: " + productSku));
+
+        if (product.getStock() == 0) {
+            throw new BusinessLogicException("Not available stock for product with SKU: " + productSku);
+        }
     }
 
     private void validateOrderStatus(Order order) {

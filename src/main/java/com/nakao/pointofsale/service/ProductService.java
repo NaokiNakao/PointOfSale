@@ -42,10 +42,11 @@ public class ProductService {
                 .orElseThrow(() -> new NotFoundException("Product not found with SKU: " + sku));
     }
 
-    public void createProduct(Product product) {
+    public String createProduct(Product product) {
         product.setSku(IdentifierGenerator.generateIdentifier(Product.SKU_PATTERN));
         uniqueIdVerification(product.getSku());
         productDAO.insert(product);
+        return product.getSku();
     }
 
     public void updateProduct(String sku, Product product) {

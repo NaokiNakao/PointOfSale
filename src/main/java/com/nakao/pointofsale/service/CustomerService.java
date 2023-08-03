@@ -38,10 +38,11 @@ public class CustomerService {
                 .orElseThrow(() -> new NotFoundException("Customer not found with ID: " + id));
     }
 
-    public void createCustomer(Customer customer) {
+    public String createCustomer(Customer customer) {
         customer.setId(IdentifierGenerator.generateIdentifier(Customer.ID_PATTERN));
         uniqueIdVerification(customer.getId());
         customerDAO.insert(customer);
+        return customer.getId();
     }
 
     public void updateCustomer(String id, Customer customer) {

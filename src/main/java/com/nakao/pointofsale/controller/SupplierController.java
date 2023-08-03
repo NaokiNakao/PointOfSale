@@ -32,8 +32,8 @@ public class SupplierController {
 
     @PostMapping
     public ResponseEntity<String > createSupplier(@RequestBody @Valid Supplier supplier) {
-        supplierService.createSupplier(supplier);
-        return new ResponseEntity<>("Supplier created", HttpStatus.CREATED);
+        Long supplierId = supplierService.createSupplier(supplier);
+        return new ResponseEntity<>("Supplier created: " + supplierId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

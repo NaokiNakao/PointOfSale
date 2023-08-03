@@ -47,13 +47,14 @@ public class EmployeeService {
         return EmployeeDTOMapper.fromEmployee(employee);
     }
 
-    public void createEmployee(Employee employee) {
+    public String createEmployee(Employee employee) {
         employee.setId(IdentifierGenerator.generateIdentifier(Employee.ID_PATTERN));
         uniqueIdVerification(employee.getId());
 
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
 
         employeeDAO.insert(employee);
+        return employee.getId();
     }
 
     public void updateEmployee(String id, EmployeeDTO employeeDTO) {

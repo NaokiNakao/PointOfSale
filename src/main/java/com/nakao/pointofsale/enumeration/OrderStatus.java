@@ -1,9 +1,5 @@
 package com.nakao.pointofsale.enumeration;
 
-/**
- * @author Naoki Nakao on 7/20/2023
- * @project POS
- */
 public enum OrderStatus {
 
     IN_PROGRESS("IN_PROGRESS"),

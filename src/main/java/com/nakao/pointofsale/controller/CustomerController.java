@@ -33,8 +33,8 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<String > createCustomer(@RequestBody @Valid Customer customer) {
-        customerService.createCustomer(customer);
-        return new ResponseEntity<>("Customer created", HttpStatus.CREATED);
+        String customerId = customerService.createCustomer(customer);
+        return new ResponseEntity<>("Customer created: " + customerId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
