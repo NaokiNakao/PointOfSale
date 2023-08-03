@@ -33,7 +33,7 @@ CREATE TABLE supplier (
     contact VARCHAR(255) NOT NULL
 );
 
--- Restock table
+-- Restock Replenishment table
 
 CREATE TABLE stock_replenishment (
     id               VARCHAR(40) PRIMARY KEY,
@@ -72,7 +72,7 @@ CREATE TABLE customer (
     birthday   DATE
 );
 
--- Order table
+-- Orders table
 
 CREATE TABLE orders (
     id             VARCHAR(40) PRIMARY KEY,
@@ -90,7 +90,7 @@ CREATE TABLE orders (
     CONSTRAINT CK_orders_status CHECK ( status IN ('IN_PROGRESS', 'PROCESSED') )
 );
 
--- order Item table
+-- Order Item table
 
 CREATE TABLE order_item (
     id          VARCHAR(40) PRIMARY KEY,
