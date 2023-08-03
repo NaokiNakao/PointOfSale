@@ -31,13 +31,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<String > createProduct(@RequestBody @Valid Product product) {
+    public ResponseEntity<String> createProduct(@RequestBody @Valid Product product) {
         String productSku = productService.createProduct(product);
         return new ResponseEntity<>("Product created: " + productSku, HttpStatus.CREATED);
     }
 
     @PutMapping("/{sku}")
-    public ResponseEntity<String > updateProduct(@PathVariable String sku, @RequestBody @Valid Product product) {
+    public ResponseEntity<String> updateProduct(@PathVariable String sku, @RequestBody @Valid Product product) {
         productService.updateProduct(sku, product);
         return new ResponseEntity<>("Product updated", HttpStatus.OK);
     }

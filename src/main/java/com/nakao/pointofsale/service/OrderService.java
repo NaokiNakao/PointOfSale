@@ -105,14 +105,20 @@ public class OrderService {
     }
 
     /**
-     * Processes an order by updating its date and status to "PROCESSED", and saves the changes.
+     * Processes an order by updating its date, status to "PROCESSED", and decreasing stock units
+     * for the associated products.
+     * Saves the changes to the order and updates the product stock accordingly.
      *
      * @param id The ID of the order to be processed.
+     * @throws BusinessLogicException If the order is already processed or if there is insufficient
+     *                              stock for any of the associated products.
+     * @throws NotFoundException If the order with the specified ID is not found.
      */
     public void processOrder(String id) {
         Order order = getOrderById(id);
         order.setDate(LocalDate.now());
         order.setStatus(OrderStatus.PROCESSED.getValue());
+        decreaseStockUnits(id);
         orderRepository.save(order);
     }
 
@@ -146,6 +152,14 @@ public class OrderService {
         order.setTotal(net.add(tax));
 
         orderRepository.save(order);
+    }
+
+    private void decreaseStockUnits(String id) {
+        List<OrderItem> orderItems = orderRepository.getOrderItems(id);
+
+        for (OrderItem orderItem : orderItems) {
+            productRepository.decreaseStock(orderItem.getProductSku());
+        }
     }
 
 }

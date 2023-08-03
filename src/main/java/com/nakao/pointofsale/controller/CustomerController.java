@@ -32,13 +32,13 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<String > createCustomer(@RequestBody @Valid Customer customer) {
+    public ResponseEntity<String> createCustomer(@RequestBody @Valid Customer customer) {
         String customerId = customerService.createCustomer(customer);
         return new ResponseEntity<>("Customer created: " + customerId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String > updateCustomer(@PathVariable String id, @RequestBody @Valid Customer customer) {
+    public ResponseEntity<String> updateCustomer(@PathVariable String id, @RequestBody @Valid Customer customer) {
         customerService.updateCustomer(id, customer);
         return new ResponseEntity<>("Customer updated", HttpStatus.OK);
     }

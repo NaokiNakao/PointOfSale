@@ -31,7 +31,7 @@ public class StockReplenishmentController {
     }
 
     @PostMapping
-    public ResponseEntity<String > createStockReplenishment(@RequestBody @Valid StockReplenishment stockReplenishment) {
+    public ResponseEntity<String> createStockReplenishment(@RequestBody @Valid StockReplenishment stockReplenishment) {
         String stockReplenishmentId = stockReplenishmentService.createStockReplenishment(stockReplenishment);
         return new ResponseEntity<>("Stock Replenishment created: " + stockReplenishmentId, HttpStatus.CREATED);
     }

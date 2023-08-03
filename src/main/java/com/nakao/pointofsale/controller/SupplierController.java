@@ -31,13 +31,13 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<String > createSupplier(@RequestBody @Valid Supplier supplier) {
+    public ResponseEntity<String> createSupplier(@RequestBody @Valid Supplier supplier) {
         Long supplierId = supplierService.createSupplier(supplier);
         return new ResponseEntity<>("Supplier created: " + supplierId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String > updateSupplier(@PathVariable Long id, @RequestBody @Valid Supplier supplier) {
+    public ResponseEntity<String> updateSupplier(@PathVariable Long id, @RequestBody @Valid Supplier supplier) {
         supplierService.updateSupplier(id, supplier);
         return new ResponseEntity<>("Supplier updated", HttpStatus.OK);
     }

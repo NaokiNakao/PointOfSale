@@ -23,4 +23,10 @@ public interface ProductRepository extends ListCrudRepository<Product, String>,
             "WHERE p.sku = :sku")
     void updateStock(String sku, Integer quantity);
 
+    @Modifying
+    @Query("UPDATE Product p " +
+            "SET stock = stock - 1 " +
+            "WHERE p.sku = :sku")
+    void decreaseStock(String sku);
+
 }
