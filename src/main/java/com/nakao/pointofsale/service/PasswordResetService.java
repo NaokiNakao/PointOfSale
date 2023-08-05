@@ -26,6 +26,11 @@ public class PasswordResetService {
     private final EmployeeService employeeService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
+    /**
+     * Creates a new password reset request for the specified email.
+     *
+     * @param email The email address associated with the password reset request.
+     */
     public void createPasswordReset(String email) {
         PasswordReset passwordReset = PasswordReset.builder()
                 .token(UUID.randomUUID().toString())
@@ -38,6 +43,16 @@ public class PasswordResetService {
         applicationEventPublisher.publishEvent(passwordResetEvent);
     }
 
+    /**
+     * Confirms a password reset request by validating the token, expiration date,
+     * and new password, and then updating the employee's password.
+     *
+     * @param token              The token associated with the password reset request.
+     * @param passwordConfirmation The password confirmation object containing the new password.
+     * @throws NotFoundException        If the password reset request is not found.
+     * @throws InvalidTokenException    If the token has expired.
+     * @throws NotMatchingPasswordsException If the new passwords do not match.
+     */
     public void confirmPasswordReset(String token, PasswordConfirmation passwordConfirmation) {
         PasswordReset passwordReset = getPasswordResetByToken(token);
         validateExpirationDate(passwordReset.getExpirationDate());
