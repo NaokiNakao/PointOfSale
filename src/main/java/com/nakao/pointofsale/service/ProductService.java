@@ -5,7 +5,7 @@ import com.nakao.pointofsale.exception.DeletionException;
 import com.nakao.pointofsale.exception.NotFoundException;
 import com.nakao.pointofsale.exception.UniqueIdentifierGenerationException;
 import com.nakao.pointofsale.model.Product;
-import com.nakao.pointofsale.observer.LowStockEvent;
+import com.nakao.pointofsale.event.lowstock.LowStockEvent;
 import com.nakao.pointofsale.repository.ProductRepository;
 import com.nakao.pointofsale.repository.StockReplenishmentRepository;
 import com.nakao.pointofsale.util.IdentifierGenerator;

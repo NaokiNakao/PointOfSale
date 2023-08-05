@@ -83,6 +83,10 @@ public class EmployeeService {
         return employeeRepository.getAllByRole(role);
     }
 
+    public void updateEmployeePassword(String email, String newPassword) {
+        employeeRepository.updatePasswordByEmail(email, passwordEncoder.encode(newPassword));
+    }
+
     private void uniqueIdVerification(String id) {
         if (employeeRepository.existsById(id)) {
             throw new UniqueIdentifierGenerationException("Error generating unique identifier for Employee");

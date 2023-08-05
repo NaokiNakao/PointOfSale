@@ -1,4 +1,4 @@
-package com.nakao.pointofsale.observer;
+package com.nakao.pointofsale.event.lowstock;
 
 import com.nakao.pointofsale.model.Product;
 

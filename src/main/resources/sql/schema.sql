@@ -100,6 +100,14 @@ CREATE TABLE order_item (
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- Password Reset Request table
+
+CREATE TABLE password_reset_request (
+    token           VARCHAR(40) PRIMARY KEY,
+    email           VARCHAR(255) NOT NULL,
+    expiration_date TIMESTAMP NOT NULL
+);
+
 
 
 
