@@ -38,10 +38,11 @@ public class CategoryService {
                 .orElseThrow(() -> new NotFoundException("Category not found with ID: " + id));
     }
 
-    public void createCategory(Category category) {
+    public String createCategory(Category category) {
         category.setId(IdentifierGenerator.generateIdentifier(Category.ID_PATTERN));
         uniqueIdVerification(category.getId());
         categoryDAO.insert(category);
+        return category.getId();
     }
 
     public void updateCategory(String id, Category category) {

@@ -32,9 +32,9 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<String > createOrder(@RequestBody @Valid Order order) {
-        orderService.createOrder(order);
-        return new ResponseEntity<>("Order created", HttpStatus.CREATED);
+    public ResponseEntity<String> createOrder(@RequestBody @Valid Order order) {
+        String orderId = orderService.createOrder(order);
+        return new ResponseEntity<>("Order created: " + orderId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -50,7 +50,7 @@ public class OrderController {
     }
 
     @PostMapping("/{id}/items")
-    public ResponseEntity<String > addItem(@PathVariable String id, @RequestBody @Valid OrderItem orderItem) {
+    public ResponseEntity<String> addItem(@PathVariable String id, @RequestBody @Valid OrderItem orderItem) {
         orderService.addItem(id, orderItem);
         return new ResponseEntity<>("Order Item added", HttpStatus.CREATED);
     }

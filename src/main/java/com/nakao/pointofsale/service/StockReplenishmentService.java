@@ -2,9 +2,9 @@ package com.nakao.pointofsale.service;
 
 import com.nakao.pointofsale.dao.StockReplenishmentDAO;
 import com.nakao.pointofsale.enumeration.StockReplenishmentStatus;
+import com.nakao.pointofsale.exception.BusinessLogicException;
 import com.nakao.pointofsale.exception.DeletionException;
 import com.nakao.pointofsale.exception.NotFoundException;
-import com.nakao.pointofsale.exception.StockReplenishmentProcessingException;
 import com.nakao.pointofsale.model.StockReplenishment;
 import com.nakao.pointofsale.repository.ProductRepository;
 import com.nakao.pointofsale.repository.StockReplenishmentRepository;
@@ -39,9 +39,10 @@ public class StockReplenishmentService {
                 .orElseThrow(() -> new NotFoundException("Stock Replenishment not found with ID: " + id));
     }
 
-    public void createStockReplenishment(StockReplenishment stockReplenishment) {
+    public String createStockReplenishment(StockReplenishment stockReplenishment) {
         stockReplenishment.setId(UUID.randomUUID().toString());
         stockReplenishmentDAO.insert(stockReplenishment);
+        return stockReplenishment.getId();
     }
 
     public void updateStockReplenishment(String id, StockReplenishment stockReplenishment) {
@@ -60,6 +61,15 @@ public class StockReplenishmentService {
         }
     }
 
+    /**
+     * Processes an existing stock replenishment, updating the stock quantity of the associated product
+     * and changing the status of the replenishment to "DELIVERED".
+     *
+     * @param id The unique identifier of the stock replenishment to be processed.
+     * @throws BusinessLogicException If the stock replenishment is not in the "PENDING" status,
+     *                               indicating that it cannot be processed at this time.
+     * @throws NotFoundException If a stock replenishment with the provided ID is not found.
+     */
     public void replenishmentProcessing(String id) {
         StockReplenishment stockReplenishment = getStockReplenishmentById(id);
 
@@ -70,7 +80,7 @@ public class StockReplenishmentService {
                     StockReplenishmentStatus.DELIVERED.getValue());
         }
         else {
-            throw new StockReplenishmentProcessingException("Unable to process Stock Replenishment");
+            throw new BusinessLogicException("Unable to process Stock Replenishment with ID: " + id);
         }
     }
 

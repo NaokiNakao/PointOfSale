@@ -31,13 +31,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<String > createProduct(@RequestBody @Valid Product product) {
-        productService.createProduct(product);
-        return new ResponseEntity<>("Product created", HttpStatus.CREATED);
+    public ResponseEntity<String> createProduct(@RequestBody @Valid Product product) {
+        String productSku = productService.createProduct(product);
+        return new ResponseEntity<>("Product created: " + productSku, HttpStatus.CREATED);
     }
 
     @PutMapping("/{sku}")
-    public ResponseEntity<String > updateProduct(@PathVariable String sku, @RequestBody @Valid Product product) {
+    public ResponseEntity<String> updateProduct(@PathVariable String sku, @RequestBody @Valid Product product) {
         productService.updateProduct(sku, product);
         return new ResponseEntity<>("Product updated", HttpStatus.OK);
     }
@@ -46,20 +46,6 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable String sku) {
         productService.deleteProduct(sku);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping("/{sku}/check-status")
-    public ResponseEntity<String> checkStockLevel(@PathVariable String sku) {
-        String message;
-
-        if (productService.checkForReplenishment(sku)) {
-            message = "Stock replenishment for " + sku + " is needed. Notification sent";
-        }
-        else {
-            message = "Stock level for " + sku + " is sufficient";
-        }
-
-        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
 }

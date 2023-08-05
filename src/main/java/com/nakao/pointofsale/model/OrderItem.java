@@ -1,7 +1,7 @@
 package com.nakao.pointofsale.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.nakao.pointofsale.annotations.ForeignKeyValidation;
+import com.nakao.pointofsale.annotation.ForeignKeyValidation;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

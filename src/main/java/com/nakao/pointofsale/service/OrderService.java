@@ -4,10 +4,12 @@ import com.nakao.pointofsale.dao.OrderDAO;
 import com.nakao.pointofsale.enumeration.OrderStatus;
 import com.nakao.pointofsale.exception.DeletionException;
 import com.nakao.pointofsale.exception.NotFoundException;
-import com.nakao.pointofsale.exception.OrderAlreadyProcessedException;
+import com.nakao.pointofsale.exception.BusinessLogicException;
 import com.nakao.pointofsale.model.Order;
 import com.nakao.pointofsale.model.OrderItem;
+import com.nakao.pointofsale.model.Product;
 import com.nakao.pointofsale.repository.OrderRepository;
+import com.nakao.pointofsale.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderDAO orderDAO;
+    private final ProductRepository productRepository;
 
     public List<Order> getOrders(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
@@ -40,9 +43,10 @@ public class OrderService {
                 .orElseThrow(() -> new NotFoundException("Order not found with ID: " + id));
     }
 
-    public void createOrder(Order order) {
+    public String createOrder(Order order) {
         order.setId(UUID.randomUUID().toString());
         orderDAO.insert(order);
+        return order.getId();
     }
 
     public void updateOrder(String id, Order order) {
@@ -57,17 +61,36 @@ public class OrderService {
             validateOrderStatus(getOrderById(id));
             orderRepository.deleteById(id);
         }
-        catch (OrderAlreadyProcessedException e) {
+        catch (BusinessLogicException e) {
             throw new DeletionException("Unable to delete Order with ID: " + id);
         }
     }
 
+    /**
+     * Adds an order item to the specified order, updates its total price, and saves the changes.
+     *
+     * @param id The ID of the order to which the item will be added.
+     * @param orderItem The order item to be added.
+     * @throws BusinessLogicException If the order's status is not "IN_PROGRESS" or if there is no available stock
+     *                               for the product associated with the order item.
+     * @throws NotFoundException If the product associated with the order item is not found.
+     */
     public void addItem(String id, OrderItem orderItem) {
         Order order = getOrderById(id);
+        validateAvailableStock(orderItem.getProductSku());
         validateOrderStatus(order);
         updateOrderWithNewItem(order, orderItem);
     }
 
+    /**
+     * Removes an order item with the specified product SKU from the given order, updates the order's total price,
+     * and saves the changes.
+     *
+     * @param orderId The ID of the order from which the item will be removed.
+     * @param productSku The SKU of the product associated with the item to be removed.
+     * @throws BusinessLogicException If the order's status is not "IN_PROGRESS".
+     * @throws NotFoundException If the order item with the specified product SKU is not found in the order.
+     */
     public void removeItem(String orderId, String productSku) {
         Order order = getOrderById(orderId);
         validateOrderStatus(order);
@@ -81,16 +104,36 @@ public class OrderService {
         }
     }
 
+    /**
+     * Processes an order by updating its date, status to "PROCESSED", and decreasing stock units
+     * for the associated products.
+     * Saves the changes to the order and updates the product stock accordingly.
+     *
+     * @param id The ID of the order to be processed.
+     * @throws BusinessLogicException If the order is already processed or if there is insufficient
+     *                              stock for any of the associated products.
+     * @throws NotFoundException If the order with the specified ID is not found.
+     */
     public void processOrder(String id) {
         Order order = getOrderById(id);
         order.setDate(LocalDate.now());
         order.setStatus(OrderStatus.PROCESSED.getValue());
+        decreaseStockUnits(id);
         orderRepository.save(order);
+    }
+
+    private void validateAvailableStock(String productSku) {
+        Product product = productRepository.findById(productSku)
+                .orElseThrow(() -> new NotFoundException("Product not found with SKU: " + productSku));
+
+        if (product.getStock() == 0) {
+            throw new BusinessLogicException("Not available stock for product with SKU: " + productSku);
+        }
     }
 
     private void validateOrderStatus(Order order) {
         if (!order.getStatus().equals(OrderStatus.IN_PROGRESS.getValue())) {
-            throw new OrderAlreadyProcessedException("Order with ID: " + order.getId() + " already processed");
+            throw new BusinessLogicException("Order with ID: " + order.getId() + " already processed");
         }
     }
 
@@ -109,6 +152,14 @@ public class OrderService {
         order.setTotal(net.add(tax));
 
         orderRepository.save(order);
+    }
+
+    private void decreaseStockUnits(String id) {
+        List<OrderItem> orderItems = orderRepository.getOrderItems(id);
+
+        for (OrderItem orderItem : orderItems) {
+            productRepository.decreaseStock(orderItem.getProductSku());
+        }
     }
 
 }

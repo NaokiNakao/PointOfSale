@@ -3,11 +3,11 @@ package com.nakao.pointofsale.exception;
 import com.nakao.pointofsale.exception.common.ApiRequestException;
 import org.springframework.http.HttpStatus;
 
-public class OrderAlreadyProcessedException extends ApiRequestException {
+public class NotMatchingPasswordsException extends ApiRequestException {
 
-    public OrderAlreadyProcessedException(String message) {
+    public NotMatchingPasswordsException(String message) {
         super(message);
-        setHttpStatus(HttpStatus.CONFLICT);
+        setHttpStatus(HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -1,10 +1,11 @@
 package com.nakao.pointofsale.exception;
+
 import com.nakao.pointofsale.exception.common.ApiRequestException;
 import org.springframework.http.HttpStatus;
 
-public class StockReplenishmentProcessingException extends ApiRequestException {
+public class BusinessLogicException extends ApiRequestException {
 
-    public StockReplenishmentProcessingException(String message) {
+    public BusinessLogicException(String message) {
         super(message);
         setHttpStatus(HttpStatus.CONFLICT);
     }

@@ -1,7 +1,7 @@
 package com.nakao.pointofsale.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.nakao.pointofsale.annotations.ForeignKeyValidation;
+import com.nakao.pointofsale.annotation.ForeignKeyValidation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class Order {
     private BigDecimal tax;
     private BigDecimal total;
 
-    @Pattern(regexp = "^(CASH|CREDIT_CARD)$", message = "Status must be in [CASH, CREDIT_CARD]")
+    @Pattern(regexp = "^(CASH|CREDIT_CARD|PAYPAL)$", message = "Status must be in [CASH, CREDIT_CARD, PAYPAL]")
     private String paymentMethod;
 
     @Pattern(regexp = "^(IN_PROGRESS|PROCESSED)$", message = "Status must be in [IN_PROGRESS, PROCESSED]")

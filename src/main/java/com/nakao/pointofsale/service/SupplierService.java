@@ -34,8 +34,8 @@ public class SupplierService {
                 .orElseThrow(() -> new NotFoundException("Supplier not found with ID: " + id));
     }
 
-    public void createSupplier(Supplier supplier) {
-        supplierRepository.save(supplier);
+    public Long createSupplier(Supplier supplier) {
+        return supplierRepository.save(supplier).getId();
     }
 
     public void updateSupplier(Long id, Supplier supplier) {

@@ -47,13 +47,14 @@ public class EmployeeService {
         return EmployeeDTOMapper.fromEmployee(employee);
     }
 
-    public void createEmployee(Employee employee) {
+    public String createEmployee(Employee employee) {
         employee.setId(IdentifierGenerator.generateIdentifier(Employee.ID_PATTERN));
         uniqueIdVerification(employee.getId());
 
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
 
         employeeDAO.insert(employee);
+        return employee.getId();
     }
 
     public void updateEmployee(String id, EmployeeDTO employeeDTO) {
@@ -80,6 +81,10 @@ public class EmployeeService {
 
     public List<Employee> getEmployeesByRole(String role) {
         return employeeRepository.getAllByRole(role);
+    }
+
+    public void updateEmployeePassword(String email, String newPassword) {
+        employeeRepository.updatePasswordByEmail(email, passwordEncoder.encode(newPassword));
     }
 
     private void uniqueIdVerification(String id) {
