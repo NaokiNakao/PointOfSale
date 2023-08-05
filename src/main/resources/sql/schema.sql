@@ -4,14 +4,10 @@ DROP SCHEMA IF EXISTS pos;
 CREATE SCHEMA pos;
 USE pos;
 
--- Category table
-
 CREATE TABLE category (
     id   VARCHAR(9) PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
-
--- Product table
 
 CREATE TABLE product (
     sku              VARCHAR(13) PRIMARY KEY,
@@ -24,16 +20,12 @@ CREATE TABLE product (
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
--- Supplier table
-
 CREATE TABLE supplier (
     id      BIGINT AUTO_INCREMENT PRIMARY KEY,
     name    VARCHAR(50) NOT NULL,
     address VARCHAR(50) NOT NULL,
     contact VARCHAR(255) NOT NULL
 );
-
--- Restock Replenishment table
 
 CREATE TABLE stock_replenishment (
     id               VARCHAR(40) PRIMARY KEY,
@@ -47,8 +39,6 @@ CREATE TABLE stock_replenishment (
     FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
--- Employee table
-
 CREATE TABLE employee (
     id         VARCHAR(9) PRIMARY KEY,
     first_name VARCHAR (50) NOT NULL,
@@ -61,8 +51,6 @@ CREATE TABLE employee (
     CONSTRAINT CK_employee_role CHECK ( role IN ('CASHIER', 'MANAGER', 'ADMIN') )
 );
 
--- Customer table
-
 CREATE TABLE customer (
     id         VARCHAR(13) PRIMARY KEY,
     first_name VARCHAR (50) NOT NULL,
@@ -71,8 +59,6 @@ CREATE TABLE customer (
     address    VARCHAR(100),
     birthday   DATE
 );
-
--- Orders table
 
 CREATE TABLE orders (
     id             VARCHAR(40) PRIMARY KEY,
@@ -90,8 +76,6 @@ CREATE TABLE orders (
     CONSTRAINT CK_orders_status CHECK ( status IN ('IN_PROGRESS', 'PROCESSED') )
 );
 
--- Order Item table
-
 CREATE TABLE order_item (
     id          VARCHAR(40) PRIMARY KEY,
     product_sku VARCHAR(13) NOT NULL,
@@ -100,12 +84,11 @@ CREATE TABLE order_item (
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Password Reset Request table
-
 CREATE TABLE password_reset_request (
     token           VARCHAR(40) PRIMARY KEY,
     email           VARCHAR(255) NOT NULL,
-    expiration_date TIMESTAMP NOT NULL
+    expiration_date TIMESTAMP NOT NULL,
+    FOREIGN KEY (email) REFERENCES employee(email) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
