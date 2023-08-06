@@ -1,6 +1,5 @@
 package com.nakao.pointofsale.dao;
 
-import com.nakao.pointofsale.model.Customer;
 import com.nakao.pointofsale.model.Order;
 import com.nakao.pointofsale.model.OrderItem;
 import com.nakao.pointofsale.util.InvoiceProduct;
@@ -52,7 +51,7 @@ public class OrderDAO implements DAO<Order> {
 
         Object[] params = {customerId};
 
-        return jdbcTemplate.queryForObject(sql, params, String.class);
+        return jdbcTemplate.queryForObject(sql, String.class, params);
     }
 
     public String getEmployeeName(String employeeId) {
@@ -62,7 +61,7 @@ public class OrderDAO implements DAO<Order> {
 
         Object[] params = {employeeId};
 
-        return jdbcTemplate.queryForObject(sql, params, String.class);
+        return jdbcTemplate.queryForObject(sql, String.class, params);
     }
 
     public List<InvoiceProduct> getInvoiceProducts(String orderId) {
