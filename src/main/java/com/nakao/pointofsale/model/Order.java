@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -24,7 +24,7 @@ public class Order {
 
     @Id
     private String id;
-    private LocalDate date;
+    private LocalDateTime purchaseDate;
     private BigDecimal net;
     private BigDecimal tax;
     private BigDecimal total;

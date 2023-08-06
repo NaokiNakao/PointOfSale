@@ -96,11 +96,11 @@ VALUES ('CUS000003', 'Emily', 'Johnson', '555-3333', '789 Elm Rd', '1995-12-10')
 
 
 -- Order insertions
-INSERT INTO orders (id, date, net, tax, total, payment_method, status, customer_id, employee_id)
-VALUES ('ORDER000001', '2023-07-20', 100.00, 10.00, 110.00, 'CASH', 'IN_PROGRESS', 'CUS000001', 'EMP000001');
+INSERT INTO orders (id, purchase_date, net, tax, total, payment_method, status, customer_id, employee_id)
+VALUES ('ORDER000001', '2023-07-20 00:00:00', 100.00, 10.00, 110.00, 'CASH', 'IN_PROGRESS', 'CUS000001', 'EMP000001');
 
-INSERT INTO orders (id, date, net, tax, total, payment_method, status, customer_id, employee_id)
-VALUES ('ORDER000002', '2023-07-22', 200.00, 20.00, 220.00, 'CREDIT_CARD', 'IN_PROGRESS', 'CUS000002', 'EMP000002');
+INSERT INTO orders (id, purchase_date, net, tax, total, payment_method, status, customer_id, employee_id)
+VALUES ('ORDER000002', '2023-07-22 00:00:00', 200.00, 20.00, 220.00, 'CREDIT_CARD', 'IN_PROGRESS', 'CUS000002', 'EMP000002');
 
 -- Order Item insertions
 INSERT INTO order_item (id, product_sku, order_id)

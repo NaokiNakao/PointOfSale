@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -116,7 +117,7 @@ public class OrderService {
      */
     public void processOrder(String id) {
         Order order = getOrderById(id);
-        order.setDate(LocalDate.now());
+        order.setPurchaseDate(LocalDateTime.now());
         order.setStatus(OrderStatus.PROCESSED.getValue());
         decreaseStockUnits(id);
         orderRepository.save(order);

@@ -62,7 +62,7 @@ CREATE TABLE customer (
 
 CREATE TABLE orders (
     id             VARCHAR(40) PRIMARY KEY,
-    date           DATE,
+    purchase_date  TIMESTAMP,
     net            DECIMAL(10, 2) DEFAULT 0.00,
     tax            DECIMAL(10, 2) DEFAULT 0.00,
     total          DECIMAL(10, 2) DEFAULT 0.00,
