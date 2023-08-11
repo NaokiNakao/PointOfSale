@@ -9,5 +9,4 @@ public class InvalidTokenException extends ApiRequestException {
         super(message);
         setHttpStatus(HttpStatus.UNAUTHORIZED);
     }
-
 }

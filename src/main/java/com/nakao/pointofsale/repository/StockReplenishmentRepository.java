@@ -26,5 +26,4 @@ public interface StockReplenishmentRepository extends CrudRepository<StockReplen
             "FROM Stock_Replenishment sr " +
             "WHERE sr.supplier_id = :supplierId")
     Integer countBySupplierId(Long supplierId);
-
 }

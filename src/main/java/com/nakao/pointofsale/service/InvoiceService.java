@@ -8,7 +8,6 @@ import com.nakao.pointofsale.model.Order;
 import com.nakao.pointofsale.repository.OrderRepository;
 import com.nakao.pointofsale.util.InvoiceProduct;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,14 +19,17 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class InvoiceService {
-
     private final OrderRepository orderRepository;
     private final OrderDAO orderDAO;
 
     private static final Font BOLD_FONT = FontFactory.getFont(FontFactory.TIMES_BOLD, 18);
     private static final Font NORMAL_FONT = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12);
+
+    public InvoiceService(OrderRepository orderRepository, OrderDAO orderDAO) {
+        this.orderRepository = orderRepository;
+        this.orderDAO = orderDAO;
+    }
 
     @Value("${business.name}")
     private String businessName;

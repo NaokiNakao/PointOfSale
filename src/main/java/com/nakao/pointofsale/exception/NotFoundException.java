@@ -9,5 +9,4 @@ public class NotFoundException extends ApiRequestException {
         super(message);
         setHttpStatus(HttpStatus.NOT_FOUND);
     }
-
 }

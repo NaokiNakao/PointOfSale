@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ForeignKeyValidator implements ConstraintValidator<ForeignKeyValidation, Object> {
-
     private String tableName;
     private String fieldName;
     private final JdbcTemplate jdbcTemplate;

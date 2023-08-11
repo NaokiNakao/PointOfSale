@@ -3,17 +3,18 @@ package com.nakao.pointofsale.controller;
 import com.nakao.pointofsale.service.PasswordResetService;
 import com.nakao.pointofsale.util.PasswordConfirmation;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/password-reset")
-@RequiredArgsConstructor
 public class PasswordResetController {
-
     private final PasswordResetService passwordResetService;
+
+    public PasswordResetController(PasswordResetService passwordResetService) {
+        this.passwordResetService = passwordResetService;
+    }
 
     @PostMapping
     public ResponseEntity<?> requestPasswordReset(@RequestParam String email) {

@@ -1,7 +1,6 @@
 package com.nakao.pointofsale.enumeration;
 
 public enum OrderStatus {
-
     IN_PROGRESS("IN_PROGRESS"),
     PROCESSED("PROCESSED");
 
@@ -14,5 +13,4 @@ public enum OrderStatus {
     public String getValue() {
         return value;
     }
-
 }

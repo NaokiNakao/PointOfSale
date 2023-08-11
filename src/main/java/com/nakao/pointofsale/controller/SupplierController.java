@@ -3,7 +3,6 @@ package com.nakao.pointofsale.controller;
 import com.nakao.pointofsale.model.Supplier;
 import com.nakao.pointofsale.service.SupplierService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/suppliers")
-@RequiredArgsConstructor
 public class SupplierController {
-
     private final SupplierService supplierService;
+
+    public SupplierController(SupplierService supplierService) {
+        this.supplierService = supplierService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Supplier>> getSuppliers(@RequestParam(defaultValue = "0") Integer page,

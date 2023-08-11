@@ -12,11 +12,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ForeignKeyValidator.class)
 public @interface ForeignKeyValidation {
-
     String message() default "Non existing foreign key";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     String tableName();
     String fieldName() default "id";
-
 }

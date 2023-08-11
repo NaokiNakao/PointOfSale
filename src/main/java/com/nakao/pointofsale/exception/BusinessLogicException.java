@@ -9,5 +9,4 @@ public class BusinessLogicException extends ApiRequestException {
         super(message);
         setHttpStatus(HttpStatus.CONFLICT);
     }
-
 }

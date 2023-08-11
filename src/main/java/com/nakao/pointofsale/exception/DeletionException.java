@@ -9,5 +9,4 @@ public class DeletionException extends ApiRequestException {
         super(message);
         setHttpStatus(HttpStatus.CONFLICT);
     }
-
 }

@@ -10,7 +10,6 @@ import com.nakao.pointofsale.model.OrderItem;
 import com.nakao.pointofsale.model.Product;
 import com.nakao.pointofsale.repository.OrderRepository;
 import com.nakao.pointofsale.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,12 +24,16 @@ import java.util.UUID;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class OrderService {
-
     private final OrderRepository orderRepository;
     private final OrderDAO orderDAO;
     private final ProductRepository productRepository;
+
+    public OrderService(OrderRepository orderRepository, OrderDAO orderDAO, ProductRepository productRepository) {
+        this.orderRepository = orderRepository;
+        this.orderDAO = orderDAO;
+        this.productRepository = productRepository;
+    }
 
     public List<Order> getOrders(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

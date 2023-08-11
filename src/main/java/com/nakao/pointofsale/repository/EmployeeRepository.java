@@ -23,5 +23,4 @@ public interface EmployeeRepository extends CrudRepository<Employee, String >,
             "SET password = :password " +
             "WHERE e.email = :email")
     void updatePasswordByEmail(String email, String password);
-
 }

@@ -47,5 +47,4 @@ public interface OrderRepository extends ListCrudRepository<Order, String>,
             "WHERE o.employee_id = :employeeId AND o.status = :status " +
             "LIMIT 1")
     Optional<Order> getByEmployeeIdAndStatus(String employeeId, String status);
-
 }

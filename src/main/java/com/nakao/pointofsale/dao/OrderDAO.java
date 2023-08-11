@@ -3,7 +3,6 @@ package com.nakao.pointofsale.dao;
 import com.nakao.pointofsale.model.Order;
 import com.nakao.pointofsale.model.OrderItem;
 import com.nakao.pointofsale.util.InvoiceProduct;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -11,10 +10,12 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 public class OrderDAO implements DAO<Order> {
-
     private final JdbcTemplate jdbcTemplate;
+
+    public OrderDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void insert(Order order) {
@@ -75,5 +76,4 @@ public class OrderDAO implements DAO<Order> {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(InvoiceProduct.class), params);
     }
-
 }

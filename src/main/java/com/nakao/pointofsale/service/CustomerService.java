@@ -8,7 +8,6 @@ import com.nakao.pointofsale.model.Customer;
 import com.nakao.pointofsale.repository.CustomerRepository;
 import com.nakao.pointofsale.repository.OrderRepository;
 import com.nakao.pointofsale.util.IdentifierGenerator;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,12 +19,16 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class CustomerService {
-
     private final CustomerRepository customerRepository;
     private final CustomerDAO customerDAO;
     private final OrderRepository orderRepository;
+
+    public CustomerService(CustomerRepository customerRepository, CustomerDAO customerDAO, OrderRepository orderRepository) {
+        this.customerRepository = customerRepository;
+        this.customerDAO = customerDAO;
+        this.orderRepository = orderRepository;
+    }
 
     public List<Customer> getCustomers(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

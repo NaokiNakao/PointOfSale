@@ -32,5 +32,4 @@ public class IdentifierGeneratorTest {
         String result = IdentifierGenerator.generateIdentifier(pattern);
         Assertions.assertEquals(pattern, result, "Expected the same pattern when no special character is present.");
     }
-
 }

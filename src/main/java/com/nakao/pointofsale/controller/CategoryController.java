@@ -3,7 +3,6 @@ package com.nakao.pointofsale.controller;
 import com.nakao.pointofsale.model.Category;
 import com.nakao.pointofsale.service.CategoryService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/categories")
-@RequiredArgsConstructor
 public class CategoryController {
-
     private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Category>> getCategories(@RequestParam(defaultValue = "0") Integer page,

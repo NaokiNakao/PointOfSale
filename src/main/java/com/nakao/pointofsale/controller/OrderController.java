@@ -6,7 +6,6 @@ import com.nakao.pointofsale.service.InvoiceService;
 import com.nakao.pointofsale.service.OrderService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/orders")
-@RequiredArgsConstructor
 public class OrderController {
-
     private final OrderService orderService;
     private final InvoiceService invoiceService;
+
+    public OrderController(OrderService orderService, InvoiceService invoiceService) {
+        this.orderService = orderService;
+        this.invoiceService = invoiceService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Order>> getOrders(@RequestParam(defaultValue = "0") Integer page,

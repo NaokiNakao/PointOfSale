@@ -5,7 +5,6 @@ import com.nakao.pointofsale.exception.DeletionException;
 import com.nakao.pointofsale.exception.NotFoundException;
 import com.nakao.pointofsale.model.Supplier;
 import com.nakao.pointofsale.repository.SupplierRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,11 +16,14 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class SupplierService {
-
     private final SupplierRepository supplierRepository;
     private final StockReplenishmentRepository stockReplenishmentRepository;
+
+    public SupplierService(SupplierRepository supplierRepository, StockReplenishmentRepository stockReplenishmentRepository) {
+        this.supplierRepository = supplierRepository;
+        this.stockReplenishmentRepository = stockReplenishmentRepository;
+    }
 
     public List<Supplier> getSuppliers(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

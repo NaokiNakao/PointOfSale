@@ -1,15 +1,16 @@
 package com.nakao.pointofsale.dao;
 
 import com.nakao.pointofsale.model.StockReplenishment;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class StockReplenishmentDAO implements DAO<StockReplenishment> {
-
     private final JdbcTemplate jdbcTemplate;
+
+    public StockReplenishmentDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void insert(StockReplenishment stockReplenishment) {

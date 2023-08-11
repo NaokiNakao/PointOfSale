@@ -9,5 +9,4 @@ public class NotMatchingPasswordsException extends ApiRequestException {
         super(message);
         setHttpStatus(HttpStatus.BAD_REQUEST);
     }
-
 }

@@ -9,5 +9,4 @@ public class UniqueIdentifierGenerationException extends ApiRequestException {
         super(message);
         setHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }

@@ -1,15 +1,16 @@
 package com.nakao.pointofsale.dao;
 
 import com.nakao.pointofsale.model.PasswordReset;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class PasswordResetDAO implements DAO<PasswordReset> {
-
     private final JdbcTemplate jdbcTemplate;
+
+    public PasswordResetDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void insert(PasswordReset passwordReset) {
@@ -21,5 +22,4 @@ public class PasswordResetDAO implements DAO<PasswordReset> {
 
         jdbcTemplate.update(sql, params);
     }
-
 }

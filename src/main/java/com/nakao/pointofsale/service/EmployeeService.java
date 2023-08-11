@@ -10,7 +10,6 @@ import com.nakao.pointofsale.model.Employee;
 import com.nakao.pointofsale.repository.EmployeeRepository;
 import com.nakao.pointofsale.repository.OrderRepository;
 import com.nakao.pointofsale.util.IdentifierGenerator;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,13 +22,19 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class EmployeeService {
-
     private final EmployeeRepository employeeRepository;
     private final EmployeeDAO employeeDAO;
     private final OrderRepository orderRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeDAO employeeDAO,
+                           OrderRepository orderRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.employeeRepository = employeeRepository;
+        this.employeeDAO = employeeDAO;
+        this.orderRepository = orderRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public List<EmployeeDTO> getEmployees(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

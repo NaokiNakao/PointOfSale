@@ -1,7 +1,6 @@
 package com.nakao.pointofsale.enumeration;
 
 public enum StockReplenishmentStatus {
-
     PENDING("PENDING"),
     DELIVERED("DELIVERED");
 
@@ -14,5 +13,4 @@ public enum StockReplenishmentStatus {
     public String getValue() {
         return value;
     }
-
 }

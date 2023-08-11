@@ -1,16 +1,17 @@
 package com.nakao.pointofsale.dao;
 
 import com.nakao.pointofsale.model.Customer;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 
 @Component
-@RequiredArgsConstructor
 public class CustomerDAO implements DAO<Customer> {
-
     private final JdbcTemplate jdbcTemplate;
+
+    public CustomerDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void insert(Customer customer) {
@@ -22,5 +23,4 @@ public class CustomerDAO implements DAO<Customer> {
 
         jdbcTemplate.update(sql, params);
     }
-
 }

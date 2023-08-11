@@ -3,7 +3,6 @@ package com.nakao.pointofsale.controller;
 import com.nakao.pointofsale.model.StockReplenishment;
 import com.nakao.pointofsale.service.StockReplenishmentService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/stock-replenishments")
-@RequiredArgsConstructor
 public class StockReplenishmentController {
-
     private final StockReplenishmentService stockReplenishmentService;
+
+    public StockReplenishmentController(StockReplenishmentService stockReplenishmentService) {
+        this.stockReplenishmentService = stockReplenishmentService;
+    }
 
     @GetMapping
     public ResponseEntity<List<StockReplenishment>> getStockReplenishments(@RequestParam(defaultValue = "0") Integer page,

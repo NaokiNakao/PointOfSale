@@ -6,6 +6,9 @@ import com.nakao.pointofsale.model.Category;
 import com.nakao.pointofsale.model.Product;
 import com.nakao.pointofsale.model.StockReplenishment;
 import com.nakao.pointofsale.model.Supplier;
+import com.nakao.pointofsale.util.builder.ProductBuilder;
+import com.nakao.pointofsale.util.builder.StockReplenishmentBuilder;
+import com.nakao.pointofsale.util.builder.SupplierBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +27,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @Transactional
 public class StockReplenishmentServiceTest {
-
     private final StockReplenishmentService stockReplenishmentService;
     private final CategoryService categoryService;
     private final ProductService productService;
@@ -46,10 +48,10 @@ public class StockReplenishmentServiceTest {
 
     @BeforeEach
     public void setUp() {
-        Category category = Category.builder().name("Test Category").build();
+        Category category = new Category("Test Category");
         String categoryId = categoryService.createCategory(category);
 
-        Product product = Product.builder()
+        Product product = new ProductBuilder()
                 .name("Test Product")
                 .categoryId(categoryId)
                 .stock(50)
@@ -59,7 +61,7 @@ public class StockReplenishmentServiceTest {
                 .build();
         productSku = productService.createProduct(product);
 
-        Supplier supplier = Supplier.builder()
+        Supplier supplier = new SupplierBuilder()
                 .name("Test Supplier")
                 .address("Test Address")
                 .contact("supplier@test.com")
@@ -69,7 +71,7 @@ public class StockReplenishmentServiceTest {
 
     @Test
     public void replenishmentProcessing_Success() {
-        StockReplenishment stockReplenishment = StockReplenishment.builder()
+        StockReplenishment stockReplenishment = new StockReplenishmentBuilder()
                 .deliveryDate(LocalDate.now())
                 .productSku(productSku)
                 .productQuantity(50)
@@ -90,7 +92,7 @@ public class StockReplenishmentServiceTest {
 
     @Test
     public void replenishmentProcessing_Failed() {
-        StockReplenishment stockReplenishment = StockReplenishment.builder()
+        StockReplenishment stockReplenishment = new StockReplenishmentBuilder()
                 .deliveryDate(LocalDate.now())
                 .productSku(productSku)
                 .productQuantity(50)
@@ -103,5 +105,4 @@ public class StockReplenishmentServiceTest {
         assertThrows(BusinessLogicException.class, () ->
                 stockReplenishmentService.replenishmentProcessing(stockReplenishmentId));
     }
-
 }

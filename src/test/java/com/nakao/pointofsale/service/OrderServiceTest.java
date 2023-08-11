@@ -3,6 +3,9 @@ package com.nakao.pointofsale.service;
 import com.nakao.pointofsale.enumeration.EmployeeRole;
 import com.nakao.pointofsale.exception.BusinessLogicException;
 import com.nakao.pointofsale.model.*;
+import com.nakao.pointofsale.util.builder.EmployeeBuilder;
+import com.nakao.pointofsale.util.builder.OrderBuilder;
+import com.nakao.pointofsale.util.builder.ProductBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @Transactional
 public class OrderServiceTest {
-
     private final OrderService orderService;
     private final CategoryService categoryService;
     private final ProductService productService;
@@ -45,10 +47,10 @@ public class OrderServiceTest {
 
     @BeforeEach
     public void setUp() {
-        Category category = Category.builder().name("Test Category").build();
+        Category category = new Category("Test Category");
         String categoryId = categoryService.createCategory(category);
 
-        product1Sku = productService.createProduct(Product.builder()
+        product1Sku = productService.createProduct(new ProductBuilder()
                 .name("Test Product 1")
                 .categoryId(categoryId)
                 .stock(100)
@@ -57,7 +59,7 @@ public class OrderServiceTest {
                 .sellingPrice(BigDecimal.valueOf(19.99))
                 .build());
 
-        product2Sku = productService.createProduct(Product.builder()
+        product2Sku = productService.createProduct(new ProductBuilder()
                 .sku("PROD-456")
                 .name("Test Product 2")
                 .categoryId(categoryId)
@@ -67,7 +69,7 @@ public class OrderServiceTest {
                 .sellingPrice(BigDecimal.valueOf(29.99))
                 .build());
 
-        product3Sku = productService.createProduct(Product.builder()
+        product3Sku = productService.createProduct(new ProductBuilder()
                 .sku("PROD-789")
                 .name("Test Product 3")
                 .categoryId(categoryId)
@@ -77,7 +79,7 @@ public class OrderServiceTest {
                 .sellingPrice(BigDecimal.valueOf(39.99))
                 .build());
 
-        Employee employee = Employee.builder()
+        Employee employee = new EmployeeBuilder()
                 .firstName("John")
                 .lastName("Smith")
                 .email("johnsmith@test.com")
@@ -90,19 +92,13 @@ public class OrderServiceTest {
 
     @Test
     public void addItem_UpdatesTotalWhenAdded() {
-        Order order = Order.builder().employeeId(employeeId).build();
+        Order order = new OrderBuilder().employeeId(employeeId).build();
         String orderId = orderService.createOrder(order);
 
-        OrderItem orderItem1 = OrderItem.builder()
-                .orderId(orderId)
-                .productSku(product1Sku)
-                .build();
+        OrderItem orderItem1 = new OrderItem(product1Sku, orderId);
         orderService.addItem(orderId, orderItem1);
 
-        OrderItem orderItem2 = OrderItem.builder()
-                .orderId(orderId)
-                .productSku(product2Sku)
-                .build();
+        OrderItem orderItem2 = new OrderItem(product2Sku, orderId);
         orderService.addItem(orderId, orderItem2);
 
         Product product1 = productService.getProductBySku(product1Sku);
@@ -120,16 +116,12 @@ public class OrderServiceTest {
 
     @Test
     public void addItem_NonAvailableProduct() {
-        Order order = Order.builder().employeeId(employeeId).build();
+        Order order = new OrderBuilder().employeeId(employeeId).build();
         String orderId = orderService.createOrder(order);
 
-        OrderItem orderItem = OrderItem.builder()
-                .orderId(orderId)
-                .productSku(product3Sku)
-                .build();
+        OrderItem orderItem = new OrderItem(product3Sku, orderId);
 
         assertThrows(BusinessLogicException.class, () ->
                 orderService.addItem(orderId, orderItem));
     }
-
 }

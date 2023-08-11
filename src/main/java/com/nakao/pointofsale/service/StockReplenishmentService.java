@@ -8,7 +8,6 @@ import com.nakao.pointofsale.exception.NotFoundException;
 import com.nakao.pointofsale.model.StockReplenishment;
 import com.nakao.pointofsale.repository.ProductRepository;
 import com.nakao.pointofsale.repository.StockReplenishmentRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,12 +20,17 @@ import java.util.UUID;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class StockReplenishmentService {
-
     private final StockReplenishmentRepository stockReplenishmentRepository;
     private final StockReplenishmentDAO stockReplenishmentDAO;
     private final ProductRepository productRepository;
+
+    public StockReplenishmentService(StockReplenishmentRepository stockReplenishmentRepository,
+                                     StockReplenishmentDAO stockReplenishmentDAO, ProductRepository productRepository) {
+        this.stockReplenishmentRepository = stockReplenishmentRepository;
+        this.stockReplenishmentDAO = stockReplenishmentDAO;
+        this.productRepository = productRepository;
+    }
 
     public List<StockReplenishment> getStockReplenishments(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

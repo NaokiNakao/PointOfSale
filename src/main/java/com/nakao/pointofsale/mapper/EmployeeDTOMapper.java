@@ -11,5 +11,4 @@ public class EmployeeDTOMapper {
         BeanUtils.copyProperties(employee, employeeDTO);
         return employeeDTO;
     }
-
 }

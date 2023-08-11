@@ -1,5 +1,6 @@
 package com.nakao.pointofsale.exception.common;
 
+import com.nakao.pointofsale.util.builder.ExceptionResponseBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,17 +11,12 @@ import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Naoki Nakao on 7/18/2023
- * @project POS
- */
-
 @ControllerAdvice
 public class ApiExceptionHandler {
 
     @ExceptionHandler(ApiRequestException.class)
     public ResponseEntity<ExceptionResponse> handleApiRequestException(ApiRequestException e) {
-        ExceptionResponse response = ExceptionResponse.builder()
+        ExceptionResponse response = new ExceptionResponseBuilder()
                 .message(e.getMessage())
                 .httpStatus(e.getHttpStatus())
                 .timestamp(ZonedDateTime.now())
@@ -36,7 +32,7 @@ public class ApiExceptionHandler {
                 errors.put(error.getField(), error.getDefaultMessage())
         );
 
-        ExceptionResponse response = ExceptionResponse.builder()
+        ExceptionResponse response = new ExceptionResponseBuilder()
                 .message("Not valid arguments")
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .timestamp(ZonedDateTime.now())
@@ -45,5 +41,4 @@ public class ApiExceptionHandler {
 
         return new ResponseEntity<>(response, response.getHttpStatus());
     }
-
 }

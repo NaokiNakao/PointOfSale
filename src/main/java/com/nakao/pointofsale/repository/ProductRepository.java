@@ -27,5 +27,4 @@ public interface ProductRepository extends ListCrudRepository<Product, String>,
             "SET stock = stock - 1 " +
             "WHERE p.sku = :sku")
     void decreaseStock(String sku);
-
 }

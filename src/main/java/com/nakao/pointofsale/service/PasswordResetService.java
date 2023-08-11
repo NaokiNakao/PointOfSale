@@ -8,7 +8,6 @@ import com.nakao.pointofsale.exception.NotMatchingPasswordsException;
 import com.nakao.pointofsale.model.PasswordReset;
 import com.nakao.pointofsale.repository.PasswordResetRepository;
 import com.nakao.pointofsale.util.PasswordConfirmation;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +17,19 @@ import java.util.UUID;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class PasswordResetService {
-
     private final PasswordResetRepository passwordResetRepository;
     private final PasswordResetDAO passwordResetDAO;
     private final EmployeeService employeeService;
     private final ApplicationEventPublisher applicationEventPublisher;
+
+    public PasswordResetService(PasswordResetRepository passwordResetRepository, PasswordResetDAO passwordResetDAO,
+                                EmployeeService employeeService, ApplicationEventPublisher applicationEventPublisher) {
+        this.passwordResetRepository = passwordResetRepository;
+        this.passwordResetDAO = passwordResetDAO;
+        this.employeeService = employeeService;
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
 
     /**
      * Creates a new password reset request for the specified email.
@@ -32,11 +37,11 @@ public class PasswordResetService {
      * @param email The email address associated with the password reset request.
      */
     public void createPasswordReset(String email) {
-        PasswordReset passwordReset = PasswordReset.builder()
-                .token(UUID.randomUUID().toString())
-                .email(email)
-                .expirationDate(LocalDateTime.now().plusHours(24))
-                .build();
+        PasswordReset passwordReset = new PasswordReset(
+                UUID.randomUUID().toString(),
+                email,
+                LocalDateTime.now().plusHours(24)
+        );
 
         passwordResetDAO.insert(passwordReset);
         PasswordResetEvent passwordResetEvent = new PasswordResetEvent(passwordReset);

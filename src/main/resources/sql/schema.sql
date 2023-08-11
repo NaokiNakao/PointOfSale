@@ -24,7 +24,7 @@ CREATE TABLE supplier (
     id      BIGINT AUTO_INCREMENT PRIMARY KEY,
     name    VARCHAR(50) NOT NULL,
     address VARCHAR(50) NOT NULL,
-    contact VARCHAR(255) NOT NULL
+    email   VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE stock_replenishment (

@@ -3,7 +3,6 @@ package com.nakao.pointofsale.controller;
 import com.nakao.pointofsale.model.Customer;
 import com.nakao.pointofsale.service.CustomerService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customers")
-@RequiredArgsConstructor
 public class CustomerController {
-
     private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Customer>> getCustomers(@RequestParam(defaultValue = "0") Integer pageNumber,

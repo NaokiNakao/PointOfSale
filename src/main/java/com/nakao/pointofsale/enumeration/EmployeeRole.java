@@ -1,7 +1,6 @@
 package com.nakao.pointofsale.enumeration;
 
 public enum EmployeeRole {
-
     CASHIER("CASHIER"),
     MANAGER("MANAGER"),
     EMPLOYEE("EMPLOYEE");
@@ -15,6 +14,5 @@ public enum EmployeeRole {
     public String getValue() {
         return value;
     }
-
 }
 

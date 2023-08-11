@@ -6,7 +6,6 @@ import com.nakao.pointofsale.model.Product;
 import com.nakao.pointofsale.service.EmailSenderService;
 import com.nakao.pointofsale.service.EmployeeService;
 import com.nakao.pointofsale.util.EmailMessage;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -14,14 +13,17 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 public class LowStockEventListener {
-
     private final EmployeeService employeeService;
     private final EmailSenderService emailSenderService;
 
     @Value("${spring.mail.username}")
     private String from;
+
+    public LowStockEventListener(EmployeeService employeeService, EmailSenderService emailSenderService) {
+        this.employeeService = employeeService;
+        this.emailSenderService = emailSenderService;
+    }
 
     @EventListener
     public void onLowStockEvent(LowStockEvent lowStockEvent) {
@@ -42,12 +44,6 @@ public class LowStockEventListener {
                 + "It's essential to consider that this stock level may impact order fulfillment and business operations. We recommend taking immediate action to replenish the stock to appropriate levels.\n\n"
                 + "Best regards,\n" + "Administration";
 
-        return EmailMessage.builder()
-                .to(manager.getEmail())
-                .from(from)
-                .subject(subject)
-                .text(text)
-                .build();
+        return new EmailMessage(manager.getEmail(), from, subject, text);
     }
-
 }

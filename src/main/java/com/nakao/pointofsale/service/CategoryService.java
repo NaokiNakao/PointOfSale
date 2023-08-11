@@ -8,7 +8,6 @@ import com.nakao.pointofsale.model.Category;
 import com.nakao.pointofsale.repository.CategoryRepository;
 import com.nakao.pointofsale.repository.ProductRepository;
 import com.nakao.pointofsale.util.IdentifierGenerator;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,12 +19,16 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class CategoryService {
-
     private final CategoryRepository categoryRepository;
     private final CategoryDAO categoryDAO;
     private final ProductRepository productRepository;
+
+    public CategoryService(CategoryRepository categoryRepository, CategoryDAO categoryDAO, ProductRepository productRepository) {
+        this.categoryRepository = categoryRepository;
+        this.categoryDAO = categoryDAO;
+        this.productRepository = productRepository;
+    }
 
     public List<Category> getCategories(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

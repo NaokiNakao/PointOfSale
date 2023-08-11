@@ -3,7 +3,6 @@ package com.nakao.pointofsale.util;
 import java.util.Random;
 
 public class IdentifierGenerator {
-
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final int MAX_NUMBER = 9;
 

@@ -9,7 +9,6 @@ import com.nakao.pointofsale.event.lowstock.LowStockEvent;
 import com.nakao.pointofsale.repository.ProductRepository;
 import com.nakao.pointofsale.repository.StockReplenishmentRepository;
 import com.nakao.pointofsale.util.IdentifierGenerator;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -23,13 +22,19 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class ProductService {
-
     private final ProductRepository productRepository;
     private final ProductDAO productDAO;
     private final StockReplenishmentRepository stockReplenishmentRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
+
+    public ProductService(ProductRepository productRepository, ProductDAO productDAO,
+                          StockReplenishmentRepository stockReplenishmentRepository, ApplicationEventPublisher applicationEventPublisher) {
+        this.productRepository = productRepository;
+        this.productDAO = productDAO;
+        this.stockReplenishmentRepository = stockReplenishmentRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
 
     public List<Product> getProducts(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

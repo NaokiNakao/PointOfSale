@@ -1,15 +1,16 @@
 package com.nakao.pointofsale.dao;
 
 import com.nakao.pointofsale.model.Product;
-import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class ProductDAO implements DAO<Product> {
-
     private final JdbcTemplate jdbcTemplate;
+
+    public ProductDAO(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void insert(Product product) {
@@ -21,5 +22,4 @@ public class ProductDAO implements DAO<Product> {
 
         jdbcTemplate.update(sql, params);
     }
-
 }
